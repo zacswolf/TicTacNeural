@@ -3,32 +3,38 @@
 #include <iostream>
 #include <string>
 #include <array>
+#include <math.h> 
 
 #define BOARDSIZE 9
 
-typedef enum {
-	EMPTY, PLAYER1=1, PLAYER2=2
-} tile;
+namespace T
+{
+    typedef enum {
+        EMPTY=0, PLAYER1=1, PLAYER2=2
+    } tile;
+}
 
-typedef enum {
-	NOTFINISHED, TIE, PLAYER1=1, PLAYER2=2
-} winner;
-
+namespace W
+{
+    typedef enum {
+        NOTFINISHED=4, TIE=3, PLAYER1=1, PLAYER2=2
+    } winner;
+}
+    
 class Board {
   private:
-	std::array<tile, BOARDSIZE> data;
+    std::array<T::tile, BOARDSIZE> data;
   public:
   	Board();
-    void set(int location, tile player);
-	tile get(int location);
-	bool isEmpty(int location); // if empty, true; if taken, false
+    bool set(int location, T::tile player); // true if successful
+    T::tile get(int location);
+	bool isEmpty(int location); // true if empty; false if taken
 	void clear();
-	tile* readAll();
 	int size() {
 		return BOARDSIZE;
 	}
 	std::string toString();
-	winner checkForWinner();
+    W::winner checkForWinner();
 	
 };
 
