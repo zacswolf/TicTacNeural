@@ -3,3 +3,4 @@
 *.a
 *.exe
 .DS_Store
+cpplint.py
