@@ -2,52 +2,60 @@
 
 #include "game.h"
 
+namespace tictac {
 Game::Game() {
-    whoseTurn = Play::PLAYER1;
+    whoseTurn = player::PLAYER1;
     numTerms = 0;
     numRounds = 1;
-    theWinner = W::NOTFINISHED;
-    started = Play::PLAYER1;
+    theWinner = winner::NOTFINISHED;
+    started = player::PLAYER1;
     myBoard = new Board();
-    turn();
+}
+
+void Game::start() {
+	doTurn();
 }
 
 void Game::newRound() {
     numRounds++;
     myBoard->clear();
-    whoseTurn = static_cast<Play::player>(whoseTurn % 2 + 1);
-    if (theWinner == Play::PLAYER1 || theWinner == Play::PLAYER2) {
+    whoseTurn = static_cast<player::player>(whoseTurn % 2 + 1);
+    if (theWinner == player::PLAYER1 || theWinner == player::PLAYER2) {
         // player won
-        started = static_cast<Play::player>(theWinner);
+        started = static_cast<player::player>(theWinner);
     } else {
         // tie, switch first turn
         started = whoseTurn;
     }
-    turn();
+    doTurn();
 }
-void Game::turn() {
+void Game::doTurn() {
     numTerms++;
     int choice;
+    std::cout << "Input for " << this->whoseTurn << ": ";
     std::cin >> choice;
-    while (!(myBoard->set(static_cast<Pos::position>(choice), static_cast<T::tile>(whoseTurn)))) {
+    while (!(myBoard->set(static_cast<position::position>(choice), static_cast<tile::tile>(whoseTurn)))) {
+    	std::cout << "Invalid Input!" << std::endl;
+    	std::cout << "Input: ";
         std::cin >> choice;
     }
-    whoseTurn = static_cast<Play::player>(whoseTurn % 2 + 1);
+    whoseTurn = static_cast<player::player>(whoseTurn % 2 + 1);
     theWinner = myBoard->checkForWinner();
-    if (theWinner == W::NOTFINISHED) {
+    if (theWinner == winner::NOTFINISHED) {
         // round is not finished
         std::cout << myBoard->toString() << std::endl;
-        turn();
+        doTurn();
     } else {
         // round is over
-        std::cout << theWinner << std::endl;
+        std::cout << "winner: " << theWinner << std::endl;
+        std::cout << myBoard->toString() << std::endl;
         newRound();  // never terminates
     }
 }
-int Game::turnNum() {
+size_t Game::turnNum() {
     return numTerms;
 }
-int Game::roundNum() {
+size_t Game::roundNum() {
     return numRounds;
 }
-
+}

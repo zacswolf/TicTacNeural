@@ -8,38 +8,38 @@
 #include <string>
 #include <iostream>
 
-namespace Pos {
-    typedef enum {
-        TOPLEFT    = 0, TOPMIDDLE    = 1, TOPRIGHT    = 2,
-        MIDDLELEFT = 3, MIDDLE       = 4, MIDDLERIGHT = 5,
-        BOTTOMLEFT = 6, BOTTOMMIDDLE = 7, BOTTOMRIGHT = 8
-    } position;
+namespace tictac {
+
+namespace position {
+typedef enum {
+    TOPLEFT    = 0, TOPMIDDLE    = 1, TOPRIGHT    = 2,
+    MIDDLELEFT = 3, MIDDLE       = 4, MIDDLERIGHT = 5,
+    BOTTOMLEFT = 6, BOTTOMMIDDLE = 7, BOTTOMRIGHT = 8
+} position;
 }
 
-
-namespace Play {
-    typedef enum {
-        PLAYER1 = 1, PLAYER2 = 2, NONE = 0
-    } player;
+namespace player {
+typedef enum {
+    PLAYER1 = 1, PLAYER2 = 2, NONE = 0
+} player;
 }
 
 class Game {
  private:
-    Play::player whoseTurn;
-    int numTerms;
-    int numRounds;
-    W::winner theWinner;
-    Play::player started;  // the player with the first term of the round
+    player::player whoseTurn;
+    size_t numTerms;
+    size_t numRounds;
+    winner::winner theWinner;
+    player::player started;  // the player with the first term of the round
     Board* myBoard;
  public:
     Game();
+    void start();
     void newRound();
-    void turn();
-    int turnNum();
-    int roundNum();
+    void doTurn();
+    size_t turnNum();
+    size_t roundNum();
 };
-
-
-
+}
 
 #endif  // SRC_GAME_H_

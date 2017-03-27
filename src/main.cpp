@@ -3,6 +3,6 @@
 #include "game.h"
 
 int main() {
-    Game* myGame = new Game();
-    return 0;
+    tictac::Game* myGame = new tictac::Game();
+    myGame->start();
 }

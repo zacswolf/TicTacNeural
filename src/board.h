@@ -5,35 +5,39 @@
 #include <iostream>
 #include <string>
 #include <array>
+#include <cmath>
 
 #define BOARDSIZE 9
 
-namespace T {
-    typedef enum {
-        EMPTY = 0, PLAYER1 = 1, PLAYER2 = 2
-    } tile;
+namespace tictac {
+
+namespace tile {
+typedef enum {
+    EMPTY = 0, PLAYER1 = 1, PLAYER2 = 2
+} tile;
 }
 
-namespace W {
-    typedef enum {
-        NOTFINISHED = 4, TIE = 3, PLAYER1 = 1, PLAYER2 = 2
-    } winner;
+namespace winner {
+typedef enum {
+    NOTFINISHED = 4, TIE = 3, PLAYER1 = 1, PLAYER2 = 2
+} winner;
 }
 
 class Board {
  private:
-    std::array<T::tile, BOARDSIZE> data;
+    std::array<tile::tile, BOARDSIZE> data;
  public:
     Board();
-    bool set(int location, T::tile player);  // true if successful
-    T::tile get(int location);
-    bool isEmpty(int location);  // true if empty; false if taken
+    bool set(size_t location, tile::tile player);  // true if successful
+    tile::tile get(size_t location);
+    bool isEmpty(size_t location);  // true if empty; false if taken
     void clear();
-    int size() {
+    size_t size() {
         return BOARDSIZE;
     }
     std::string toString();
-    W::winner checkForWinner();
+    winner::winner checkForWinner();
 };
+}
 
 #endif  // SRC_BOARD_H_
