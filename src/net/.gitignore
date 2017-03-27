@@ -1,8 +1,0 @@
-.*
-!/.gitignore
-cpplint.py
-network
-.DS_Store
-*.out
-*.o
-*.net
