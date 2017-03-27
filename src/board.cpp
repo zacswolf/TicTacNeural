@@ -9,6 +9,8 @@ Board::Board() {
     data.fill(tile::EMPTY);
 }
 
+// Board::~Board() {}
+
 bool Board::set(size_t location, tile::tile player) {
     if (data[location] == tile::EMPTY) {
         data[location] = player;

@@ -5,11 +5,14 @@
 namespace tictac {
 Game::Game() {
     whoseTurn = player::PLAYER1;
-    numTerms = 0;
+    numTurns = 0;
     numRounds = 1;
     theWinner = winner::NOTFINISHED;
     started = player::PLAYER1;
     myBoard = new Board();
+}
+Game::~Game() {
+	delete myBoard;
 }
 
 void Game::start() {
@@ -30,11 +33,11 @@ void Game::newRound() {
     doTurn();
 }
 void Game::doTurn() {
-    numTerms++;
-    int choice;
+    numTurns++;
+    std::string choice;
     std::cout << "Input for " << this->whoseTurn << ": ";
     std::cin >> choice;
-    while (!(myBoard->set(static_cast<position::position>(choice), static_cast<tile::tile>(whoseTurn)))) {
+    while (!(myBoard->set(static_cast<position::position>(std::stoi(choice), static_cast<tile::tile>(whoseTurn)))) {
     	std::cout << "Invalid Input!" << std::endl;
     	std::cout << "Input: ";
         std::cin >> choice;
@@ -53,7 +56,7 @@ void Game::doTurn() {
     }
 }
 size_t Game::turnNum() {
-    return numTerms;
+    return numTurns;
 }
 size_t Game::roundNum() {
     return numRounds;

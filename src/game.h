@@ -27,13 +27,14 @@ typedef enum {
 class Game {
  private:
     player::player whoseTurn;
-    size_t numTerms;
+    size_t numTurns;
     size_t numRounds;
     winner::winner theWinner;
-    player::player started;  // the player with the first term of the round
+    player::player started;  // the player with the first turn of the round
     Board* myBoard;
  public:
     Game();
+    ~Game();
     void start();
     void newRound();
     void doTurn();
