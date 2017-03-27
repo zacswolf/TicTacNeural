@@ -1,6 +1,8 @@
+// Copyright 2017 Zac Schulwolf
+
 #include "game.h"
 
-Game::Game(){
+Game::Game() {
     whoseTurn = Play::PLAYER1;
     numTerms = 0;
     numRounds = 1;
@@ -10,7 +12,7 @@ Game::Game(){
     turn();
 }
 
-void Game::newRound(){
+void Game::newRound() {
     numRounds++;
     myBoard->clear();
     whoseTurn = static_cast<Play::player>(whoseTurn % 2 + 1);
@@ -23,14 +25,13 @@ void Game::newRound(){
     }
     turn();
 }
-void Game::turn(){
+void Game::turn() {
     numTerms++;
     int choice;
     std::cin >> choice;
     while (!(myBoard->set(static_cast<Pos::position>(choice), static_cast<T::tile>(whoseTurn)))) {
         std::cin >> choice;
     }
-    
     whoseTurn = static_cast<Play::player>(whoseTurn % 2 + 1);
     theWinner = myBoard->checkForWinner();
     if (theWinner == W::NOTFINISHED) {
@@ -40,15 +41,13 @@ void Game::turn(){
     } else {
         // round is over
         std::cout << theWinner << std::endl;
-        newRound(); // never terminates
+        newRound();  // never terminates
     }
-    
-    
 }
-int Game::turnNum(){
+int Game::turnNum() {
     return numTerms;
 }
-int Game::roundNum(){
+int Game::roundNum() {
     return numRounds;
 }
 

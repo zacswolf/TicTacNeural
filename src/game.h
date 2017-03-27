@@ -1,35 +1,37 @@
-#ifndef GAME_H
-#define GAME_H
+// Copyright 2017 Zac Schulwolf
+
+#ifndef SRC_GAME_H_
+#define SRC_GAME_H_
+
 #include "board.h"
+
 #include <string>
 #include <iostream>
 
-namespace Pos
-{
+namespace Pos {
     typedef enum {
-        TOPLEFT=0, TOPMIDDLE=1, TOPRIGHT=2,
-        MIDDLELEFT=3, MIDDLE=4, MIDDLERIGHT=5,
-        BOTTOMLEFT=6, BOTTOMMIDDLE=7, BOTTOMRIGHT=8
+        TOPLEFT    = 0, TOPMIDDLE    = 1, TOPRIGHT    = 2,
+        MIDDLELEFT = 3, MIDDLE       = 4, MIDDLERIGHT = 5,
+        BOTTOMLEFT = 6, BOTTOMMIDDLE = 7, BOTTOMRIGHT = 8
     } position;
 }
 
 
-namespace Play
-{
+namespace Play {
     typedef enum {
-        PLAYER1=1, PLAYER2=2, NONE=0
+        PLAYER1 = 1, PLAYER2 = 2, NONE = 0
     } player;
 }
 
 class Game {
-private:
+ private:
     Play::player whoseTurn;
     int numTerms;
     int numRounds;
     W::winner theWinner;
-    Play::player started; // the player with the first term of the round
+    Play::player started;  // the player with the first term of the round
     Board* myBoard;
-public:
+ public:
     Game();
     void newRound();
     void turn();
@@ -40,4 +42,4 @@ public:
 
 
 
-#endif 		//GAME_H
+#endif  // SRC_GAME_H_
