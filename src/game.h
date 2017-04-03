@@ -20,7 +20,7 @@ typedef enum {
 
 namespace player {
 typedef enum {
-    PLAYER1 = 1, PLAYER2 = 2, NONE = 0
+    NONE = 0, PLAYER1 = 1, PLAYER2 = 2
 } player;
 }
 

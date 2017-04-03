@@ -37,9 +37,9 @@ void Game::doTurn() {
     std::string choice;
     std::cout << "Input for " << this->whoseTurn << ": ";
     std::cin >> choice;
-    while (!(myBoard->set(static_cast<position::position>(std::stoi(choice), static_cast<tile::tile>(whoseTurn)))) {
-    	std::cout << "Invalid Input!" << std::endl;
-    	std::cout << "Input: ";
+    while (!(myBoard->set(static_cast<position::position>(std::stoi(choice)), static_cast<tile::tile>(whoseTurn) ))) {
+    	std::cout << "Invalid Input! " << std::endl;
+    	std::cout << "Input for " << this->whoseTurn << ": ";
         std::cin >> choice;
     }
     whoseTurn = static_cast<player::player>(whoseTurn % 2 + 1);
