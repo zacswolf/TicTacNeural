@@ -5,4 +5,5 @@
 int main() {
     tictac::Game* myGame = new tictac::Game();
     myGame->start();
+    return 0;
 }

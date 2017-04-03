@@ -7,6 +7,7 @@
 
 #include <string>
 #include <iostream>
+#include <fstream>
 
 namespace tictac {
 
@@ -32,6 +33,7 @@ class Game {
     winner::winner theWinner;
     player::player started;  // the player with the first turn of the round
     Board* myBoard;
+    std::ofstream csv; // csv file that we are recording to in this game
  public:
     Game();
     ~Game();
@@ -40,6 +42,7 @@ class Game {
     void doTurn();
     size_t turnNum();
     size_t roundNum();
+    void endGame();
 };
 }
 
