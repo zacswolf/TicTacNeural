@@ -23,6 +23,7 @@ Game::~Game() {
 }
 
 void Game::start() {
+    csv << "\n4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0";
 	doTurn();
 }
 
@@ -37,6 +38,7 @@ void Game::newRound() {
         // tie, switch first turn
         started = whoseTurn;
     }
+    csv << "\n4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0";
     doTurn();
 }
 void Game::doTurn() {
@@ -57,6 +59,10 @@ void Game::doTurn() {
         
         
         // record to csv
+        csv << ", " << choice;
+        csv << ", " << whoseTurn % 2 + 1;
+        csv << "\n";
+        
         csv << theWinner;
         int ZeroPos[9];
         for (int i = 0; i < 9; i++){
@@ -73,7 +79,7 @@ void Game::doTurn() {
             TwoPos[i] = (myBoard->get(i) == tile::PLAYER2);
             csv << ", " << TwoPos[i];
         }
-        csv << "\n";
+        
         
         
         
