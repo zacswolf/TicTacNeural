@@ -1,6 +1,7 @@
 // Copyright 2017 Zac Schulwolf
 
 #include "game.h"
+#include <numeric>
 
 namespace tictac {
 Game::Game() {
@@ -80,15 +81,6 @@ void Game::doTurn() {
             csv << ", " << TwoPos[i];
         }
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
         if (theWinner == winner::NOTFINISHED) {
             // round is not finished
             std::cout << myBoard->toString() << std::endl;
@@ -110,5 +102,21 @@ size_t Game::roundNum() {
 void Game::endGame() {
     csv.close();
     delete myBoard;
+}
+
+// loads the network from filename into net
+void SingleGame::loadNetwork(std::string filename, network::Network& net) {
+	net = network::Network(filename);
+}
+// returns a vector of moves in order of preference
+// for example, if 2, 7, 3 are the best moves in that order,
+// the vector will start {2, 7, 3, ...}
+// note that the moves will sometimes be invalid, so that's why a vector is used
+std::vector<size_t> SingleGame::getMove(double_v vals, network::Network& net) {
+	double_v results = net.feedforward(vals);
+	std::vector<size_t> indices(results.size());
+	std::iota(indices.begin(), indices.end(), static_cast<size_t>(0));
+	std::sort(indices.begin(), indices.end(), [&results] (size_t a, size_t b) { return results[a] < results[b]; });
+	return indices;
 }
 }

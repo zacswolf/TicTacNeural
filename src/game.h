@@ -4,10 +4,13 @@
 #define SRC_GAME_H_
 
 #include "board.h"
+#include "net/src/network.h"
 
+#include <algorithm>
 #include <string>
 #include <iostream>
 #include <fstream>
+#include <vector>
 
 namespace tictac {
 
@@ -43,6 +46,15 @@ class Game {
     size_t turnNum();
     size_t roundNum();
     void endGame();
+};
+
+class SingleGame : Game {
+ private:
+	network::Network neuralNetwork;
+ public:
+	SingleGame(std::string netfile);
+	void loadNetwork(std::string filename, network::Network& net);
+	std::vector<size_t> getMove(double_v vals, network::Network& net);
 };
 }
 
