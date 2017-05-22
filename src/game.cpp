@@ -47,6 +47,7 @@ void Game::start() {
 void Game::newRound() {
     numRounds++;
     myBoard->clear();
+    /*
     whoseTurn = static_cast<player::player>(whoseTurn % 2 + 1);
     if (theWinner == player::PLAYER1 || theWinner == player::PLAYER2) {
         // player won
@@ -55,6 +56,8 @@ void Game::newRound() {
         // tie, switch first turn
         started = whoseTurn;
     }
+    */
+    whoseTurn = player::PLAYER1;
     csv << "\n";
     csv << BLANK_BOARD;
     doTurn();
@@ -110,6 +113,7 @@ void Game::doAITurn() {
     for (size_t i: getBoardState()) {
         data.push_back(static_cast<double>(i));
     }
+
     double_v results = ai->feedforward(data);
     std::vector<size_t> best(results.size());
     std::iota(best.begin(), best.end(), static_cast<size_t>(0));
@@ -128,6 +132,7 @@ void Game::doPlayerTurn() {
     std::cin >> choice;
     if (choice == "q") { // END CONDITION
         endGame();
+        exit(0);
     } else {
         while (tryToPlay(std::stoi(choice))) {
             std::cout << "Invalid Input! " << std::endl;
@@ -158,7 +163,6 @@ size_t Game::roundNum() {
     return numRounds;
 }
 void Game::endGame() {
-    if (!isAI) csv.close();
-    delete myBoard;
+    csv.close();
 }
 }
