@@ -20,8 +20,10 @@ int main() {
     	tictac::Game* myGame = new tictac::Game();
     	myGame->start();
 	} else if (result == 1) {
-		// create instance of SingleGame()
-		// I can provide method `int getMove(Board b)`
-		// that calls from the neural network
+		std::cout << "Enter neural network file: ";
+		std::string filename;
+		std::cin >> filename;
+		tictac::Game* myGame = new tictac::Game(filename);
+		myGame->start();
 	}
 }

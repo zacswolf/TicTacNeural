@@ -30,31 +30,30 @@ typedef enum {
 
 class Game {
  private:
+    network::Network* ai;
+    bool isAI;
     player::player whoseTurn;
     size_t numTurns;
     size_t numRounds;
+    int lastMove;
     winner::winner theWinner;
     player::player started;  // the player with the first turn of the round
     Board* myBoard;
     std::ofstream csv; // csv file that we are recording to in this game
  public:
     Game();
+    Game(std::string);
     ~Game();
     void start();
     void newRound();
+    std::vector<size_t> getBoardState();
     void doTurn();
+    void doPlayerTurn();
+    void doAITurn();
     size_t turnNum();
     size_t roundNum();
     void endGame();
-};
-
-class SingleGame : Game {
- private:
-	network::Network neuralNetwork;
- public:
-	SingleGame(std::string netfile);
-	void loadNetwork(std::string filename, network::Network& net);
-	std::vector<size_t> getMove(double_v vals, network::Network& net);
+    bool tryToPlay(int i);
 };
 }
 

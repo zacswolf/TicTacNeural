@@ -9,7 +9,7 @@
 
 #include "log/logging.h"
 
-#define INPUT_LENGTH 30
+#define INPUT_LENGTH 28
 #define OUTPUT_LENGTH 9
 
 namespace mnist {
